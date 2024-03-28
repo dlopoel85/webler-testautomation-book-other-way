@@ -3,6 +3,7 @@ package hu.webler.model;
 import hu.webler.value.Category;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Book {
 
@@ -135,5 +136,22 @@ public class Book {
                 ", isOnStock=" + isOnStock +
                 ", authors=" + authors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+        return getPublicationYear() == book.getPublicationYear() && isOnStock() == book.isOnStock()
+                && Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getCategory(), book.getCategory())
+                && Objects.equals(getPublisher(), book.getPublisher())
+                && Objects.equals(getArticleNumber(), book.getArticleNumber())
+                && Objects.equals(getAuthors(), book.getAuthors());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getCategory(), getPublisher(),
+                getPublicationYear(), getArticleNumber(), isOnStock(), getAuthors());
     }
 }
